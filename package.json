@@ -1,0 +1,11 @@
+{
+    "devDependencies": {
+        "concurrently": "^5.1.0",
+        "cypress": "^4.0.2"
+    },
+    "scripts": {
+        "ng": "ng",
+        "cypress:open": "$(npm bin)/cypress open",
+        "cypress:ci": "$(npm bin)/cypress run"
+    }
+}
