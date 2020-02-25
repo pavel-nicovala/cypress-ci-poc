@@ -1,24 +1,9 @@
-# This Docker file is for building this project on Codeship Pro
-# https://documentation.codeship.com/pro/languages-frameworks/nodejs/
-
-# use Cypress provided image with all dependencies included
 FROM cypress/base:10
-RUN node --version
-RUN npm --version
-WORKDIR /home/node/app
-# copy our test application
-COPY package.json package-lock.json ./
-COPY app ./app
-COPY serve.json ./
-# copy Cypress tests
-COPY cypress.json cypress ./
-COPY cypress ./cypress
-
-# avoid many lines of progress bars during install
-# https://github.com/cypress-io/cypress/issues/1243
-ENV CI=1
-
-# install NPM dependencies and Cypress binary
-RUN npm ci
-# check if the binary was installed successfully
+RUN npm install --save-dev cypress
 RUN $(npm bin)/cypress verify
+RUN $(npm bin)/cypress run
+
+# RUN curl -fsSLO https://get.docker.com/builds/Linux/x86_64/docker-17.04.0-ce.tgz \
+#   && tar xzvf docker-17.04.0-ce.tgz \
+#   && mv docker/docker /usr/local/bin \
+#   && rm -r docker docker-17.04.0-ce.tgz
